@@ -1,65 +1,63 @@
 import { useEffect, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { navLinks, profile } from '../data/content'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('')
-
+  const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 10)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
-    document.querySelectorAll('section[id]').forEach((s) => observer.observe(s))
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
-        scrolled ? 'border-b border-white/5 bg-ink/75 backdrop-blur-xl' : 'bg-transparent'
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+        scrolled || open ? 'border-b border-white/10 bg-ink/80 backdrop-blur-xl' : 'border-b border-transparent'
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#home" className="font-mono text-sm font-medium tracking-tight text-white">
-          {profile.name.split(' ').map((n) => n[0]).join('')}
-          <span className="text-accent">.</span>
-        </a>
+      <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6">
+        <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+          <img src="./logo-crimson.png" alt="" className="h-9 w-9" />
+          <span className="font-display text-lg tracking-tight text-white">
+            {profile.firstName} {profile.lastName}
+          </span>
+        </Link>
 
         <ul className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <li key={link.id}>
-              <a
-                href={`#${link.id}`}
-                className={`relative rounded-full px-4 py-2 text-sm transition-colors ${
-                  active === link.id ? 'text-white' : 'text-neutral-400 hover:text-white'
-                }`}
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  `relative block px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
+                    isActive ? 'text-white' : 'text-neutral-500 hover:text-white'
+                  }`
+                }
               >
-                {active === link.id && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 -z-10 rounded-full bg-white/10"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute inset-x-4 -bottom-0.5 h-px bg-crimson"
+                        transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                      />
+                    )}
+                  </>
                 )}
-                {link.label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
 
         <button
-          className="rounded-lg p-2 text-neutral-300 hover:bg-white/5 md:hidden"
+          className="p-2 text-neutral-300 hover:text-white md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -73,19 +71,27 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-white/5 bg-ink/95 px-6 backdrop-blur-xl md:hidden"
+            className="overflow-hidden px-6 md:hidden"
           >
-            {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
+            {navLinks.map((link, i) => (
+              <motion.li
+                key={link.to}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 * i }}
+              >
+                <NavLink
+                  to={link.to}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-neutral-300 hover:text-white"
+                  className={({ isActive }) =>
+                    `font-display block py-3 text-3xl ${isActive ? 'text-crimson' : 'text-white'}`
+                  }
                 >
                   {link.label}
-                </a>
-              </li>
+                </NavLink>
+              </motion.li>
             ))}
+            <li className="h-4" />
           </motion.ul>
         )}
       </AnimatePresence>

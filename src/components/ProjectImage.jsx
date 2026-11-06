@@ -1,10 +1,10 @@
 import ImagePlaceholder from './ImagePlaceholder'
 
 export default function ProjectImage({ image, fit = 'cover', className = '' }) {
-  if (!image) return <ImagePlaceholder label="Details on request" className={className} />
+  if (!image) return <ImagePlaceholder label="Confidential" className={className} />
 
   return (
-    <div className={`overflow-hidden rounded-xl border border-white/10 bg-neutral-100 ${className}`}>
+    <div className={`overflow-hidden bg-neutral-100 ${className}`}>
       <img
         src={image.src}
         alt={image.caption}

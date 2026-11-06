@@ -1,17 +1,82 @@
 export const profile = {
-  name: 'Henon Hailu',
-  role: 'Mechatronics Engineering @ UWaterloo',
+  firstName: 'Henon',
+  lastName: 'Hailu',
+  role: 'Mechatronics Engineer',
   tagline: 'I like working on cool challenging physical systems 😼',
-  focus: 'Mechanical design · Robotics · Electromechanical systems',
   email: 'henon.hailu@uwaterloo.ca',
   resume: './resume.pdf',
+  photo: './me.jpg',
 }
 
 export const navLinks = [
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { to: '/about', label: 'About' },
+  { to: '/experience', label: 'Experience' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/contact', label: 'Contact' },
+]
+
+// Text wrapped in [[double brackets]] renders as a highlighted chip.
+export const about = [
+  'I build physical systems that move, carry load, and survive the real world. Studying [[mechatronics engineering]] at the [[University of Waterloo]].',
+  'I’m drawn to problems where the physics pushes back: seals at 80 m of depth, linkages that absorb every landing, rotors that flex under stall torque. My work sits at the intersection of [[mechanical design]], [[robotics]], and [[electromechanical systems]].',
+]
+
+export const highlights = [
+  'built a [[waterproof cycloidal actuator]] targeting 80 m depth and 6.65 N·m of output torque for under $200',
+  'designing [[Kosua]], a ~$500 wheeled bipedal robot that can roll, jump, and climb stairs',
+  'engineered the frame, downtube, and detachable battery for [[UW Electrium’s long-range e-bike]]',
+  'led a [[four-month battle bot competition]] for first-year engineering students at UWaterloo',
+]
+
+export const experience = [
+  {
+    company: 'Neuralink',
+    role: 'Mechanical Engineering',
+    period: '',
+    description: ['Mechanical hardware work for brain-computer interface development. Details are confidential, but I’m happy to talk about it.'],
+    tags: ['Precision Design', 'Prototyping'],
+    project: 'neuralink',
+  },
+  {
+    company: 'Lila Sciences',
+    role: 'Hardware Engineering',
+    period: '',
+    description: ['Electromechanical hardware for autonomous science. Details are confidential, but I’m happy to talk about it.'],
+    tags: ['Electromechanical', 'Automation'],
+    project: 'lila-sciences',
+  },
+  {
+    company: 'Formlabs',
+    role: 'Hardware Engineering Project',
+    period: '',
+    description: [
+      'Designed and built a motorized powder-coating linear stage that applies a uniform powder layer in a single pass for optical property measurements, replacing an error-prone, multi-pass manual process.',
+      'Owned it end to end: Onshape CAD, rail and leadscrew sizing, machining, and C++ firmware for programmable speed and stroke.',
+    ],
+    tags: ['Onshape', 'Machining', 'C++', 'Precision Motion'],
+    project: 'formlabs',
+  },
+  {
+    company: 'UW Electrium Mobility',
+    role: 'Mechanical Design',
+    period: '',
+    description: [
+      'Owned a significant portion of the mechanical design for a long-range gravel and road e-bike: frame FEA, a seven-piece sheet-metal downtube, and a waterproof detachable 10s6p battery case.',
+      'Kept frame stresses at least 5× below yield and cut downtube material cost by ~20% through stock and waterjet-kerf planning.',
+    ],
+    tags: ['SolidWorks', 'ANSYS', 'Altium', 'GD&T'],
+    project: 'electrium-ebike',
+  },
+  {
+    company: 'University of Waterloo',
+    role: 'Battle Bot Tournament Lead',
+    period: '',
+    description: [
+      'Led a four-month robotics competition where three first-year teams designed 1 kg, $100 combat robots, culminating in a final battle.',
+    ],
+    tags: ['Leadership', 'Robotics', 'Mentorship'],
+    project: 'battlebot',
+  },
 ]
 
 const img = (dir, captions) => captions.map((caption, i) => ({ src: `./projects/${dir}/${i}.webp`, caption }))
@@ -21,6 +86,7 @@ export const projects = [
     id: 'marine-motors',
     title: 'Marine Motors',
     subtitle: 'QDD underwater cycloidal actuator',
+    summary: 'A compact, waterproof BLDC actuator with an integrated 7:1 cycloidal gearbox, built for underwater robotic manipulation.',
     tools: ['SolidWorks', 'ANSYS', 'SLA Printing', 'FOC'],
     stats: [
       { value: '80 m', label: 'Target depth' },
@@ -64,6 +130,7 @@ export const projects = [
     id: 'kosua',
     title: 'Kosua',
     subtitle: 'Wheeled bipedal robot',
+    summary: 'A ~$500 wheeled biped built to roll, jump, and climb stairs, with a four-bar leg designed for impact and low backlash.',
     tools: ['Onshape', 'Controls', 'Linkage Synthesis'],
     stats: [
       { value: '~$500', label: 'Target build cost' },
@@ -96,6 +163,7 @@ export const projects = [
     id: 'electrium-ebike',
     title: 'Electrium E-Bike',
     subtitle: 'Long-range frame, downtube & detachable battery',
+    summary: 'A long-range gravel and road e-bike for UW Electrium, with a custom downtube and a waterproof detachable battery.',
     tools: ['SolidWorks', 'ANSYS', 'Altium', 'Machining'],
     stats: [
       { value: '3 hr', label: 'Runtime at full power' },
@@ -131,6 +199,7 @@ export const projects = [
     id: 'formlabs',
     title: 'Formlabs',
     subtitle: 'Powder-coating linear stage',
+    summary: 'A motorized linear stage that lays down a perfectly uniform powder layer in one pass for optical measurements.',
     tools: ['Onshape', 'Machining', 'C++'],
     stats: [
       { value: '1 pass', label: 'Uniform powder layer' },
@@ -163,6 +232,7 @@ export const projects = [
     id: 'neuralink',
     title: 'Neuralink',
     subtitle: 'Mechanical engineering',
+    summary: 'Mechanical hardware for brain-computer interface development. Details available on request.',
     confidential: true,
     tools: ['Precision Design', 'Prototyping'],
     stats: [],
@@ -176,6 +246,7 @@ export const projects = [
     id: 'lila-sciences',
     title: 'Lila Sciences',
     subtitle: 'Hardware engineering',
+    summary: 'Electromechanical hardware for autonomous science. Details available on request.',
     confidential: true,
     tools: ['Electromechanical', 'Automation'],
     stats: [],
@@ -189,6 +260,7 @@ export const projects = [
     id: 'battlebot',
     title: 'Battle Bot Tournament',
     subtitle: 'Autonomous 1 kg combat robot & competition lead',
+    summary: 'Led a UWaterloo combat-robot competition and built an autonomous 1 kg bot with vision-based targeting.',
     tools: ['SolidWorks', 'ANSYS', 'Altium', 'C++', 'Object Detection'],
     stats: [
       { value: '1 kg', label: 'Weight limit' },
@@ -223,6 +295,7 @@ export const projects = [
     id: 'wheelchair',
     title: 'Electric Wheelchair',
     subtitle: 'All-terrain joystick & WiFi controlled chair',
+    summary: 'A $350 electric wheelchair with joystick and WiFi control, built for community members on rough terrain.',
     tools: ['SolidWorks', 'Altium', 'C++', 'Fabrication'],
     stats: [
       { value: '$350', label: 'Total budget' },
@@ -247,45 +320,7 @@ export const projects = [
   },
 ]
 
-export const skills = [
-  {
-    category: 'Mechanical',
-    items: [
-      'SolidWorks',
-      'Onshape',
-      'ANSYS FEA',
-      'Topology Optimization',
-      'GD&T',
-      'Linkage & Mechanism Design',
-      'Cycloidal Gearboxes',
-      'Sealing & Waterproofing',
-      'Thermal Analysis',
-    ],
-  },
-  {
-    category: 'Electrical',
-    items: [
-      'Altium Designer',
-      'PCB Design',
-      'BLDC Motors & FOC',
-      'Stator Winding',
-      'Battery Packs & BMS',
-      'Anti-spark & Charging Circuits',
-      'ESP32 / Arduino',
-      'C++',
-    ],
-  },
-  {
-    category: 'Fabrication',
-    items: [
-      'Machining (Mill & Lathe)',
-      'SLA & FDM 3D Printing',
-      'Laser Cutting',
-      'Waterjet DFM',
-      'Sheet Metal',
-      'Spot Welding (Cells)',
-      'Soldering',
-      'Prototype Assembly',
-    ],
-  },
-]
+const byId = (ids) => ids.map((id) => projects.find((p) => p.id === id))
+
+export const featuredProjects = byId(['neuralink', 'marine-motors', 'kosua', 'electrium-ebike', 'formlabs'])
+export const otherProjects = byId(['lila-sciences', 'battlebot', 'wheelchair'])
