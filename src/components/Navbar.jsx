@@ -27,13 +27,13 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
-        scrolled ? 'border-b border-white/5 bg-neutral-950/70 backdrop-blur-xl' : 'bg-transparent'
+        scrolled ? 'border-b border-white/5 bg-ink/75 backdrop-blur-xl' : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#home" className="font-mono text-sm font-medium tracking-tight text-white">
           {profile.name.split(' ').map((n) => n[0]).join('')}
-          <span className="text-sky-300">.</span>
+          <span className="text-accent">.</span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">
@@ -73,7 +73,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-white/5 bg-neutral-950/95 px-6 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-white/5 bg-ink/95 px-6 backdrop-blur-xl md:hidden"
           >
             {navLinks.map((link) => (
               <li key={link.id}>

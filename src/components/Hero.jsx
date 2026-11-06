@@ -14,12 +14,12 @@ export default function Hero() {
     <section id="home" className="relative flex min-h-screen items-center overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="grid-bg absolute inset-0" />
-        <div className="blob absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-sky-500/20 blur-[120px]" />
+        <div className="blob absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-accent/20 blur-[120px]" />
         <div
-          className="blob absolute -right-24 top-1/3 h-80 w-80 rounded-full bg-violet-500/15 blur-[120px]"
+          className="blob absolute -right-24 top-1/3 h-80 w-80 rounded-full bg-white/[0.06] blur-[120px]"
           style={{ animationDelay: '-7s' }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-neutral-950 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
       </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-6 pt-16">
@@ -28,15 +28,15 @@ export default function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-neutral-300 backdrop-blur"
         >
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
           {profile.role}
         </motion.div>
 
         <motion.h1
           {...fadeUp(0.1)}
-          className="mt-8 text-5xl font-semibold tracking-tight text-white sm:text-7xl lg:text-8xl"
+          className="font-display mt-8 text-5xl leading-[0.95] text-white sm:text-7xl lg:text-8xl"
         >
           {profile.name}
         </motion.h1>
@@ -45,8 +45,8 @@ export default function Hero() {
           {profile.tagline}
         </motion.p>
 
-        <motion.p {...fadeUp(0.25)} className="mt-3 font-mono text-sm text-neutral-500">
-          Mechanical design · Robotics · Electromechanical systems
+        <motion.p {...fadeUp(0.25)} className="mt-3 font-mono text-sm uppercase tracking-wider text-accent">
+          {profile.focus}
         </motion.p>
 
         <motion.div {...fadeUp(0.35)} className="mt-10 flex flex-wrap gap-4">

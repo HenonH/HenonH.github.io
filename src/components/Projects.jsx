@@ -10,7 +10,7 @@ export default function Projects() {
 
   return (
     <Section id="projects" eyebrow="01 — Work" title="Selected projects">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} onOpen={setSelected} />
         ))}
